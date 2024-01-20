@@ -3,6 +3,7 @@ from hevy_data_parsing import df
 from nicegui import ui
 from nicegui.events import ValueChangeEventArguments
 
+ui.page_title('Hevy Graph Maker')
 ui.label('Hevy graph demo')
 
 list_of_exercises = df['exercise_title'].unique().tolist()
@@ -17,7 +18,7 @@ def update_chart():
     chart.options['series'][0]={'name': toggled_metric, 'data': list(zip(times, metric))}
     chart.update()
 
-def show(event: ValueChangeEventArguments):
+def selector_changed(event: ValueChangeEventArguments):
     name = type(event.sender).__name__
     if name == 'Select':
         global selected_exercise
@@ -29,8 +30,8 @@ def show(event: ValueChangeEventArguments):
     
 
 
-ui.select(list_of_exercises, value=list_of_exercises[0], on_change=show)
-ui.toggle({'heaviest_weight':'Heaviest Weight','1rm':'One Rep Max', 'best_set_volume':'Best Set Volume', 'total_volume':'Session Volume', 'total_reps':'Total Reps'}, value='heaviest_weight', on_change=show)
+ui.select(list_of_exercises, value=list_of_exercises[0], on_change=selector_changed)
+ui.toggle({'heaviest_weight':'Heaviest Weight','1rm':'One Rep Max', 'best_set_volume':'Best Set Volume', 'total_volume':'Session Volume', 'total_reps':'Total Reps'}, value='heaviest_weight', on_change=selector_changed)
 
 chart = ui.highchart({
         'title': False,
