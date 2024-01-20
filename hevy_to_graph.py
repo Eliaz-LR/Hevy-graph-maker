@@ -13,9 +13,9 @@ toggled_metric = 'heaviest_weight'
 def update_chart():
     get_exercise = df[df['exercise_title'] == selected_exercise]
     get_exercise = get_exercise.sort_values(by=['start_time'], ascending=True)
-    times = get_exercise['start_time'].astype(str).tolist()
+    times = get_exercise['start_time'].tolist()
     metric = get_exercise[toggled_metric].tolist()
-    chart.options['series'][0]={'name': metric_dict[toggled_metric], 'data': list(zip(times, metric))}
+    chart.options['series'][0]={'name': metric_dict[toggled_metric], 'data': list(zip(times, metric)), 'marker': {'symbol': 'diamond', 'enabled': True}}
     chart.update()
 
 def selector_changed(event: ValueChangeEventArguments):
@@ -35,6 +35,8 @@ ui.toggle(metric_dict, value='heaviest_weight', on_change=selector_changed)
 
 chart = ui.highchart({
         'title': False,
+        'xAxis': {'type': 'datetime'},
+        'yAxis': {'labels': {'format': '{value} kg'}},
         'series': [{}],
     })
 

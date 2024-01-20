@@ -13,8 +13,8 @@ df['1rm'] = df['weight_kg'] * (1 + (df['reps'] / 30))
 df = df.groupby(['start_time','exercise_title']).agg({'1rm': 'max', 'best_set_volume': 'max', 'total_volume': 'sum', 'weight_kg': 'max', 'reps': 'sum'}).reset_index()
 df = df.rename(columns={'weight_kg' : 'heaviest_weight', 'reps' : 'total_reps'})
 
-# Convert start_time to datetime
 df['start_time'] = pd.to_datetime(df['start_time'], format='%d %b %Y, %H:%M')
+df['start_time'] = df['start_time'].apply(lambda x: x.timestamp()*1000)
 
 # Sort df by number of occurrences of each exercise
 df['exercise_numinstances'] = df.groupby('exercise_title')['exercise_title'].transform('count')
