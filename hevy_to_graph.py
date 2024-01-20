@@ -15,7 +15,7 @@ def update_chart():
     get_exercise = get_exercise.sort_values(by=['start_time'], ascending=True)
     times = get_exercise['start_time'].astype(str).tolist()
     metric = get_exercise[toggled_metric].tolist()
-    chart.options['series'][0]={'name': toggled_metric, 'data': list(zip(times, metric))}
+    chart.options['series'][0]={'name': metric_dict[toggled_metric], 'data': list(zip(times, metric))}
     chart.update()
 
 def selector_changed(event: ValueChangeEventArguments):
@@ -28,10 +28,10 @@ def selector_changed(event: ValueChangeEventArguments):
         toggled_metric = event.value
     update_chart()
     
-
+metric_dict = {'heaviest_weight':'Heaviest Weight','1rm':'One Rep Max', 'best_set_volume':'Best Set Volume', 'total_volume':'Session Volume', 'total_reps':'Total Reps'}
 
 ui.select(list_of_exercises, value=list_of_exercises[0], on_change=selector_changed)
-ui.toggle({'heaviest_weight':'Heaviest Weight','1rm':'One Rep Max', 'best_set_volume':'Best Set Volume', 'total_volume':'Session Volume', 'total_reps':'Total Reps'}, value='heaviest_weight', on_change=selector_changed)
+ui.toggle(metric_dict, value='heaviest_weight', on_change=selector_changed)
 
 chart = ui.highchart({
         'title': False,
