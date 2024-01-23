@@ -1,0 +1,6 @@
+# flyctl launch added from .gitignore
+
+**\workouts.csv
+
+**\__pycache__
+fly.toml
