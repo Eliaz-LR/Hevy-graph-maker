@@ -12,4 +12,6 @@ def main():
     ui.label('Hevy graph demo')
     upload = ui.upload(on_upload=handle_upload, auto_upload=True, on_rejected=lambda: ui.notify('Rejected!'), max_file_size=5_000_000).props('accept=.csv').classes('max-w-full')
 
-ui.run(host=0, port=80, title='Hevy Graph Demo', favicon='https://www.hevyapp.com/wp-content/uploads/2019/06/cropped-Icon1024_Android-192x192.png')
+ui.run(title='Hevy Graph Demo', favicon='https://www.hevyapp.com/wp-content/uploads/2019/06/cropped-Icon1024_Android-192x192.png')
+# TO RUN ON FLY.IO :
+# ui.run(host=0, port=80, title='Hevy Graph Demo', favicon='https://www.hevyapp.com/wp-content/uploads/2019/06/cropped-Icon1024_Android-192x192.png')

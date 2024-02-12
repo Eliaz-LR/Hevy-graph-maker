@@ -22,7 +22,7 @@ class HevyGraphMaker:
                 'xAxis': {'type': 'datetime'},
                 'yAxis': {'labels': {'format': '{value} kg'}},
                 'series': [{}],
-            })
+            }).classes('max-w-full sm:w-6/12')
         
         self.reset_button = ui.button('Reset', on_click=self.reset)
         
